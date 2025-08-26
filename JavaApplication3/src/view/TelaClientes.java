@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package view;
 import model.Cliente;
 import dao.ClienteDAO;
-/**
- *
- * @author Etec
- */
+import javax.swing.table.DefaultTableModel;
+
+
 public class TelaClientes extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaClientes.class.getName());
@@ -18,6 +14,8 @@ public class TelaClientes extends javax.swing.JFrame {
      */
     public TelaClientes() {
         initComponents();
+        setLocationRelativeTo(null);
+        carregarTabela();
     }
 
     /**
@@ -76,7 +74,7 @@ public class TelaClientes extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nome", "Email", "Telefone"
             }
         ));
         jScrollPane1.setViewportView(tblClientes);
@@ -217,7 +215,23 @@ public class TelaClientes extends javax.swing.JFrame {
         txtEmail.setText("");
         txtTelefone.setText("");
     }//GEN-LAST:event_btnSalvarActionPerformed
-
+    
+    public void carregarTabela(){
+    DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+    
+    modelo.setNumRows(0);
+    
+    ClienteDAO clienteDAO = new ClienteDAO();
+    
+    for(Cliente c : clienteDAO.listar()){
+    modelo.addRow(new Object[]{
+        c.getID(),
+        c.getNome(),
+        c.getEmail(),
+        c.getTelefone()
+    });
+        }
+    }
     /**
      * @param args the command line arguments
      */

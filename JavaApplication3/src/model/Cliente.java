@@ -13,8 +13,8 @@ public class Cliente {
         return id;
     }
     
-    public void setID(){
-    this.id = id;
+    public void setId(int id){
+        this.id = id;
     }
     
     public String getNome(){
