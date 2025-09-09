@@ -31,7 +31,7 @@ public class TelaClientes extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtID = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtTelefone = new javax.swing.JTextField();
@@ -53,16 +53,22 @@ public class TelaClientes extends javax.swing.JFrame {
 
         jLabel4.setText("Telefone :");
 
-        txtID.setEditable(false);
-        txtID.addActionListener(new java.awt.event.ActionListener() {
+        txtId.setEditable(false);
+        txtId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIDActionPerformed(evt);
+                txtIdActionPerformed(evt);
             }
         });
 
         txtNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNomeActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
             }
         });
 
@@ -77,6 +83,11 @@ public class TelaClientes extends javax.swing.JFrame {
                 "Id", "Nome", "Email", "Telefone"
             }
         ));
+        tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblClientes);
 
         btnNovo.setText("Novo");
@@ -124,7 +135,7 @@ public class TelaClientes extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -149,7 +160,7 @@ public class TelaClientes extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -178,9 +189,9 @@ public class TelaClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDActionPerformed
+    private void txtIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIDActionPerformed
+    }//GEN-LAST:event_txtIdActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
         // TODO add your handling code here:
@@ -211,10 +222,30 @@ public class TelaClientes extends javax.swing.JFrame {
         clienteDAO.salvar(cliente);
         
         //limpar os campos após salvar
+
         txtNome.setText("");
         txtEmail.setText("");
         txtTelefone.setText("");
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
+        // TODO add your handling code here:
+        //pega o indice da linha que foi selecionada na tabela
+        int linhaSelecionada = tblClientes.getSelectedRow();
+        
+        //Preenche os campos de texto com os valores da linha selecionada
+        //.getValueAt(linha, coluna) pega o valor de uma celula especifica
+        //.toString(Converte o valor para texto)
+        txtId.setText(tblClientes.getValueAt(linhaSelecionada, 0).toString());
+        txtNome.setText(tblClientes.getValueAt(linhaSelecionada, 1).toString());
+        txtEmail.setText(tblClientes.getValueAt(linhaSelecionada, 2).toString());
+        txtTelefone.setText(tblClientes.getValueAt(linhaSelecionada,3).toString());
+        
+    }//GEN-LAST:event_tblClientesMouseClicked
     
     public void carregarTabela(){
     DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
@@ -269,7 +300,7 @@ public class TelaClientes extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tblClientes;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
     private javax.swing.JLabel txtPesquisa;
     private javax.swing.JTextField txtTelefone;
